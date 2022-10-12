@@ -30,7 +30,7 @@ def predict():
         if text is None:
             abort(400)
 
-        prediction = clf.predict(cv.transform([text]))[0]      # Do not use .fit_transform() here
+        #prediction = clf.predict(cv.transform([text]))[0]      # Do not use .fit_transform() here
         
         # Construct TwiML response
         resp = MessagingResponse()
