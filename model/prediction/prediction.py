@@ -31,12 +31,13 @@ def predict():
             abort(400)
 
         #prediction = clf.predict(cv.transform([text]))[0]      # Do not use .fit_transform() here
+        prediction = "flooding" in text
         
         # Construct TwiML response
         resp = MessagingResponse()
 
         if lifeline_url:
-            resp.message("Please click on this link: " + lifeline_url if prediction == 1 else "Please send more information")
+            resp.message("Please click on this link: " + lifeline_url if prediction is True else "Please send more information")
         else:
-            resp.message("This is a disaster!" if prediction == 1 else "No disaster")
+            resp.message("This is a disaster!" if prediction is True else "No disaster")
         return str(resp)
