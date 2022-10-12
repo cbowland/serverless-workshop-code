@@ -13,13 +13,13 @@ lifeline_url = os.getenv("LIFELINE_URL")
 
 # Load the vectorizer and model from S3
 # Disable S3 multi threading to prevent gunicorn worker deadlock
-if endpoint_url:
-    s3 = boto3.resource('s3', endpoint_url=endpoint_url)
-else:
-    s3 = boto3.resource('s3')
-s3.Bucket(bucket_name).download_file(model_file_name, model_file_name, Config=TransferConfig(use_threads=False))
-with open(model_file_name, 'rb') as f:
-    cv, clf = pickle.load(f)
+# if endpoint_url:
+#     s3 = boto3.resource('s3', endpoint_url=endpoint_url)
+# else:
+#     s3 = boto3.resource('s3')
+# s3.Bucket(bucket_name).download_file(model_file_name, model_file_name, Config=TransferConfig(use_threads=False))
+# with open(model_file_name, 'rb') as f:
+#     cv, clf = pickle.load(f)
 
 @application.route('/predict', methods=['POST'])
 def predict():
